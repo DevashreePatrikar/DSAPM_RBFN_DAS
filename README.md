@@ -1,13 +1,12 @@
-# DSAM_RBFN_DAS
 1. Description 
-This repository contains the Google Colab notebook and dataset used for our paper, "Dual-Stage Attention Mechanism for Robust Video Anomaly Detection and Localization," submitted to The Visual Computer. The project focuses on anomaly detection in video surveillance using CLSTM with Attention, RBFN optimization, and anomaly localization using a Spatial Pyramid Network with Attention. 
+This repository contains the Google Colab notebook and dataset used for our paper, "Dual-Stage Attention Mechanism for Robust Video Anomaly Detection and Localization," submitted to "The Visual Computer". The project focuses on anomaly detection in video surveillance using CLSTM with Attention, RBFN optimization, and anomaly localization using a Spatial Pyramid Network with Attention. 
 
 2. Link for datasets:
 UCSD Ped1 and Ped2: http://svcl.ucsd.edu/projects/anomaly/dataset.htm
 Avenue: http://www.cse.cuhk.edu.hk/leojia/projects/detectabnormal/dataset.html
 ShanghaiTech: https://svip-lab.github.io/dataset/campus_dataset.html
 
-3. Files Included
+4. Files Included
 - ReadMe File
 - Colab Notebooks: 
 	`[DSAPM_Train.ipynb]` → Contains the training DSAPM model. 
@@ -50,32 +49,26 @@ ShanghaiTech: https://svip-lab.github.io/dataset/campus_dataset.html
 
 - Refer file [Test.ipynb]. The DSAPM model is tested on surveillance video frames to detect anomalies. The model, stored in dsapm.h5, is loaded and used for next-frame prediction. Test data is preprocessed and provided to the DSAPM Model to predict the next frame. Mean Squared Error (MSE) is computed between the predicted and original frame, followed by Peak Signal-to-Noise Ratio (PSNR) calculation. The PSNR values are normalized to obtain frame scores, which are saved in frame_scores_test.xlsx. The anomaly detection threshold, obtained from frame_scores_train.xlsx, is applied to classify frames as normal or anomalous, with results stored in the same file. This module detects frame-level anomaly.
 
-- Refer file [Evaluation_Metrics.ipynb]. To evaluate the effectiveness of the proposed method, we compare the predicted results with the ground truth. First, we 
-obtain the ground truth labels for the UCSD Ped1, UCSD Ped2, Avenue, and ShanghaiTech datasets, assigning 1 for anomaly and 0 for normal frames. For UCSD Ped1 and 
-Ped2, the .mat files provide anomalous frame ranges, and the program marks frames within these ranges as 1. In the Avenue dataset, the Test.txt file specifies start 
-and end indices of anomalies, and the program updates the corresponding frames to 1. For ShanghaiTech, the dataset provides per-frame masks (volLabel in .mat 
-files), and the program checks each mask file—if it contains nonzero values, the corresponding frame is labeled as 1; otherwise, it remains 0. The final labels for 
-each dataset are stored in gt_data_dict and saved in ground_truth_labels.xlsx. The predicted frame scores are obtained from frame_scores_test.xlsx and compared with 
-the ground truth labels. Finally, we compute the confusion matrix, ROC curve, AUC, precision, recall, specificity, and F1-score to evaluate the model's performance.
+- Refer file [Evaluation_Metrics.ipynb]. To evaluate the effectiveness of the proposed method, we compare the predicted results with the ground truth. First, we obtain the ground truth labels for the UCSD Ped1, UCSD Ped2, Avenue, and ShanghaiTech datasets, assigning 1 for anomaly and 0 for normal frames. For UCSD Ped1 and Ped2, the .mat files provide anomalous frame ranges, and the program marks frames within these ranges as 1. In the Avenue dataset, the Test.txt file specifies start and end indices of anomalies, and the program updates the corresponding frames to 1. For ShanghaiTech, the dataset provides per-frame masks (volLabel in .mat files), and the program checks each mask file—if it contains nonzero values, the corresponding frame is labeled as 1; otherwise, it remains 0. The final labels for each dataset are stored in gt_data_dict and saved in ground_truth_labels.xlsx. The predicted frame scores are obtained from frame_scores_test.xlsx and compared with the ground truth labels. Finally, we compute the confusion matrix, ROC curve, AUC, precision, recall, specificity, and F1-score to evaluate the model's performance.
 
-- Refer to file [DAS.ipynb] for the implementation of the DAS Model, which is used for anomaly localization in video surveillance by determining optical flow. The DAS model is built by integrating the Spatial Pyramid Network with CBAM, enhancing feature extraction. The DSAPM model (dsapm.h5) is then loaded to aid in training. Specifically, DSAPM first generates future frames from training sequences, and DAS learns to estimate optical flow from these predictions. The DAS model is trained using the Adam optimizer (learning rate = 0.0001) with MSE loss. The hyperparameters, including the number of epochs and batch size, vary based on the dataset: UCSD Ped1 (Epochs = 20, Batch Size = 16), UCSD Ped2 (Epochs = 15, Batch Size = 16), Avenue (Epochs = 50, Batch Size = 32), and ShanghaiTech (Epochs = 100, Batch Size = 64). These hyperparameters are optimized for 16GB VRAM, based on extensive empirical studies. Once trained, the End-Point Error (EPE) is computed between the predicted and ground truth optical flow, and a flow score is determined. The anomaly detection threshold is set based on this flow score. During testing, DAS predicts optical flow, and frames with flow scores exceeding the threshold are classified as anomalous. Anomalies are visualized using HSV-based optical flow representation for better interpretability. This module localizes anomaly.
+- Refer file [DAS.ipynb] for the implementation of the DAS Model, which is used for anomaly localization in video surveillance by determining optical flow. The DAS model is built by integrating the Spatial Pyramid Network with CBAM, enhancing feature extraction. The DSAPM model (dsapm.h5) is then loaded to aid in training. Specifically, DSAPM first generates future frames from training sequences, and DAS learns to estimate optical flow from these predictions. The DAS model is trained using the Adam optimizer (learning rate = 0.0001) with MSE loss. The hyperparameters, including the number of epochs and batch size, vary based on the dataset: UCSD Ped1 (Epochs = 20, Batch Size = 16), UCSD Ped2 (Epochs = 15, Batch Size = 16), Avenue (Epochs = 50, Batch Size = 32), and ShanghaiTech (Epochs = 100, Batch Size = 64). These hyperparameters are optimized for 16GB VRAM, based on extensive empirical studies. Once trained, the End-Point Error (EPE) is computed between the predicted and ground truth optical flow, and a flow score is determined. The anomaly detection threshold is set based on this flow score. During testing, DAS predicts optical flow, and frames with flow scores exceeding the threshold are classified as anomalous. Anomalies are visualized using HSV-based optical flow representation for better interpretability. This module localizes anomaly.
 
 8. Citation
 If you use this work, please cite:
 
-Your Name et al., "[Dual-Stage Attention Mechanism for Robust Video Anomaly Detection and Localization]", *The Visual Computer*, 2025. 
-DOI: [Your DOI] 
+Name et al., "[Dual-Stage Attention Mechanism for Robust Video Anomaly Detection and Localization]", *The Visual Computer*, 2025. 
+DOI: [DOI] 
 
 BibTeX:
-@article{your_paper_key,
-  author    = {Your Name and Co-authors},
-  title     = {Your Paper Title},
+@article{paper_key,
+  author    = {Name and Co-authors},
+  title     = {Paper Title},
   journal   = {The Visual Computer},
   year      = {2025},
   volume    = {XX},
   number    = {X},
   pages     = {XX--XX},
-  doi       = {Your DOI (if available)}
+  doi       = {DOI (if available)}
 }
 
 **The details will be filled upon acceptance**
