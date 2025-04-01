@@ -1,5 +1,5 @@
 1. Description 
-This repository contains the Google Colab notebook and dataset used for our paper, "Dual-Stage Attention Mechanism for Robust Video Anomaly Detection and Localization," submitted to "The Visual Computer". The project focuses on anomaly detection in video surveillance using CLSTM with Attention, RBFN optimization, and anomaly localization using a Spatial Pyramid Network with Attention. 
+This repository contains the Google Colab notebook and dataset used for our paper, "Dual-Stage Attention Mechanism for Robust Video Anomaly Detection and Localization," currently submitted to a journal. The project focuses on anomaly detection in video surveillance using CLSTM with Attention, RBFN optimization, and anomaly localization using a Spatial Pyramid Network with Attention. 
 
 2. Link for datasets:
 UCSD Ped1 and Ped2: http://svcl.ucsd.edu/projects/anomaly/dataset.htm
@@ -55,20 +55,5 @@ ShanghaiTech: https://svip-lab.github.io/dataset/campus_dataset.html
 
 8. Citation
 If you use this work, please cite:
-
-Name et al., "[Dual-Stage Attention Mechanism for Robust Video Anomaly Detection and Localization]", *The Visual Computer*, 2025. 
-DOI: [DOI] 
-
-BibTeX:
-@article{paper_key,
-  author    = {Name and Co-authors},
-  title     = {Paper Title},
-  journal   = {The Visual Computer},
-  year      = {2025},
-  volume    = {XX},
-  number    = {X},
-  pages     = {XX--XX},
-  doi       = {DOI (if available)}
-}
 
 **The details will be filled upon acceptance**
